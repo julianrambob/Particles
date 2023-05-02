@@ -11,6 +11,7 @@ private:
 	// A regular RenderWindow
 	RenderWindow m_Window;
 
+
 	//vector for Particles
 	vector<Particle> m_particles;
 
