@@ -1,0 +1,23 @@
+﻿  main.cpp
+C:\Users\w1553109\source\repos\Particles\Particle.h(5,47): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\w1553109\source\repos\Particles\Particle.h(8,26): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Particle.cpp
+C:\Users\w1553109\source\repos\Particles\Particle.h(5,47): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\w1553109\source\repos\Particles\Particle.h(8,26): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Generating Code...
+main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: virtual __thiscall sf::RenderWindow::~RenderWindow(void)" (__imp_??1RenderWindow@sf@@UAE@XZ) referenced in function "public: __thiscall Engine::~Engine(void)" (??1Engine@@QAE@XZ)
+main.obj : error LNK2019: unresolved external symbol "public: __thiscall Engine::Engine(void)" (??0Engine@@QAE@XZ) referenced in function _main
+main.obj : error LNK2019: unresolved external symbol "public: void __thiscall Engine::run(void)" (?run@Engine@@QAEXXZ) referenced in function _main
+Particle.obj : error LNK2019: unresolved external symbol "public: __thiscall Matrices::RotationMatrix::RotationMatrix(double)" (??0RotationMatrix@Matrices@@QAE@N@Z) referenced in function "public: void __thiscall Particle::unitTests(void)" (?unitTests@Particle@@QAEXXZ)
+Particle.obj : error LNK2019: unresolved external symbol "public: __thiscall Matrices::ScalingMatrix::ScalingMatrix(double)" (??0ScalingMatrix@Matrices@@QAE@N@Z) referenced in function "public: void __thiscall Particle::unitTests(void)" (?unitTests@Particle@@QAEXXZ)
+Particle.obj : error LNK2019: unresolved external symbol "public: __thiscall Matrices::TranslationMatrix::TranslationMatrix(double,double,int)" (??0TranslationMatrix@Matrices@@QAE@NNH@Z) referenced in function "public: void __thiscall Particle::unitTests(void)" (?unitTests@Particle@@QAEXXZ)
+Particle.obj : error LNK2019: unresolved external symbol "private: void __thiscall Particle::rotate(double)" (?rotate@Particle@@AAEXN@Z) referenced in function "public: void __thiscall Particle::unitTests(void)" (?unitTests@Particle@@QAEXXZ)
+Particle.obj : error LNK2019: unresolved external symbol "private: void __thiscall Particle::scale(double)" (?scale@Particle@@AAEXN@Z) referenced in function "public: void __thiscall Particle::unitTests(void)" (?unitTests@Particle@@QAEXXZ)
+Particle.obj : error LNK2019: unresolved external symbol "private: void __thiscall Particle::translate(double,double)" (?translate@Particle@@AAEXNN@Z) referenced in function "public: void __thiscall Particle::unitTests(void)" (?unitTests@Particle@@QAEXXZ)
+MSVCRTD.lib(exe_winmain.obj) : error LNK2019: unresolved external symbol _WinMain@16 referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
+C:\SFML\lib\sfml-graphics-d.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+C:\SFML\lib\sfml-window-d.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+C:\SFML\lib\sfml-system-d.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+C:\SFML\lib\sfml-network-d.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+C:\SFML\lib\sfml-audio-d.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+C:\Users\w1553109\source\repos\Particles\Debug\Particles.exe : fatal error LNK1120: 10 unresolved externals
