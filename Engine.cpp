@@ -28,6 +28,26 @@ void Engine::run()
 	}
 }
 
+void Engine::input()
+{
+	Event event;
+	while(m_Window.pollEvent(event))
+	{
+		if (event.type == Event::Closed)
+			m_Window.close();
+		if (event.mouseButton.button == Mouse::Left)
+		{
+			for (int i = 0; i < 5; i++)
+			{
+				Vector2i click = Mouse::getPosition();
+				int numPoints = rand() % 50 + 25;
+				Particle p(m_Window, numPoints, click);
+				m_particles.push_back(p);
+			}
+		}
+	}
+}
+
 void Engine::update(float dtAsSeconds)
 {
 	for(vector<Particle>::iterator i = m_particles.begin(); i != m_particles.end();)
