@@ -9,6 +9,8 @@ Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosit
     m_cartesianPlane.setSize(target.getSize().x, (-1.0) * target.getSize().y);
     m_centerCoordinate = target.mapPixelToCoords(mouseClickPosition, m_cartesianPlane);
     m_vx = rand() % 400 + 100;
+    if (rand() % 2 != 0)
+        m_vx = m_vx * -1;
     m_vy = rand() % 400 + 100;
     m_color1 = Color::Blue;
     m_color2 = Color::White;
@@ -55,7 +57,7 @@ void Particle::update(float dt)
     m_vy = m_vy - (G * dt);
     dy = m_vy * dt;
 
-    //cout << m_ttl << " " << m_vx << " " << m_vy << " " << endl;
+    cout << m_ttl << " " << m_vx << " " << m_vy << " " << endl;
 
     translate(dx, dy);
 }
@@ -64,6 +66,7 @@ void Particle::translate(double xShift, double yShift)
 {
     TranslationMatrix T(xShift, yShift, m_A.getCols());
     m_A = T + m_A;
+    //cout << m_A << endl;
     m_centerCoordinate.x += xShift;
     m_centerCoordinate.y += yShift;
 }
