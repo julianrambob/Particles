@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 const float PI = 3.1415926535897932384626433;
-const float G = 4;      //Gravity
+const float G = 4000;      //Gravity
 const float TTL = 5.0;  //Time To Live
 const float SCALE = 0.999;
 
@@ -26,8 +26,8 @@ private:
     int m_numPoints;
 	Vector2f m_centerCoordinate;
     float m_radiansPerSec;
-    float vx;
-    float vy;
+    float m_vx;
+    float m_vy;
     View m_cartesianPlane;
     Color m_color1;
     Color m_color2;

@@ -16,11 +16,13 @@ void Engine::run()
 	p.unitTests();
 	cout << "Unit tests complete.  Starting engine..." << endl;
 
+
 	while (m_Window.isOpen())
 	{
 		Time dt = clock.restart();
 
-		float dtAsSeconds = dt.asSeconds();
+		double dtAsSeconds = dt.asSeconds();
+		//cout << dtAsSeconds << endl;
 
 		input();
 		update(dtAsSeconds);
@@ -33,14 +35,14 @@ void Engine::input()
 	Event event;
 	while(m_Window.pollEvent(event))
 	{
-		if (event.type == Event::Closed)
+		if (Keyboard::isKeyPressed(Keyboard::Escape))
 			m_Window.close();
 		if (event.mouseButton.button == Mouse::Left)
 		{
 			for (int i = 0; i < 5; i++)
 			{
-				Vector2i click = Mouse::getPosition();
-				int numPoints = rand() % 50 + 25;
+				Vector2i click = Mouse::getPosition(m_Window);
+				float numPoints = rand() % 26 + 25;
 				Particle p(m_Window, numPoints, click);
 				m_particles.push_back(p);
 			}
@@ -50,17 +52,22 @@ void Engine::input()
 
 void Engine::update(float dtAsSeconds)
 {
+	int count = 1;
 	for(vector<Particle>::iterator i = m_particles.begin(); i != m_particles.end();)
 	{
 		Particle p = *i;
 		if (p.getTTL() > 0.0)
 		{
+			//cout << "Particle " << count << ":" << endl;
+			count++;
 			p.update(dtAsSeconds);
 			i++;
+			//cout << endl;
 		}
 		else
 		{
-			i = m_particles.erase(i);
+			vector<Particle>::iterator y = m_particles.erase(i);
+			i = y;
 		}
 	}
 }
@@ -70,6 +77,7 @@ void Engine::draw()
 	m_Window.clear();
 	for (int i = 0; i < m_particles.size(); i++)
 	{
+		//cout << "draw" << endl;
 		m_Window.draw(m_particles[i]);
 	}
 	m_Window.display();

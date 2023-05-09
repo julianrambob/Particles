@@ -9,7 +9,7 @@ namespace Matrices
         rows = _rows;
         cols = _cols;
         //resize the vector
-       /* a.resize(rows);
+       a.resize(rows);
         for (size_t i = 0; i < rows; i++)
           {
             a[i].resize(cols);
@@ -17,7 +17,7 @@ namespace Matrices
               {
                 a[i][j] = 0;
               }
-          }*/
+          }
         a.resize(rows, vector<double>(cols, 0));
     }
     ostream& operator<<(ostream& os, const Matrix& a)
@@ -39,7 +39,7 @@ namespace Matrices
             throw runtime_error("Eror: dimensions must agree");
         }
         //add stuff
-        Matrix c(a.getRows(), b.getCols());
+        Matrix c(a.getRows(), a.getCols());
         for (int i = 0; i < a.getRows(); i++)
         {
             for (int j = 0; j < a.getCols(); j++)

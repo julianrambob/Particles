@@ -6,18 +6,18 @@ Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosit
     m_numPoints = numPoints;
     m_radiansPerSec = ((float)rand() / (RAND_MAX))*PI;
     m_cartesianPlane.setCenter(0, 0);
-    m_cartesianPlane.setSize(target.getSize().x, (-1, 0) * target.getSize().y);
+    m_cartesianPlane.setSize(target.getSize().x, (-1.0) * target.getSize().y);
     m_centerCoordinate = target.mapPixelToCoords(mouseClickPosition, m_cartesianPlane);
-    vx = rand() % 500 + 100;
-    vy = rand() % 500 + 100;
-    m_color1 = Color::Black;
+    m_vx = rand() % 400 + 100;
+    m_vy = rand() % 400 + 100;
+    m_color1 = Color::Blue;
     m_color2 = Color::White;
-    double theta = (rand() % 1/2) * PI;
+    double theta = ((float)rand()/(RAND_MAX)/2) * PI;
     double dtheta = 2 * PI / (numPoints - 1);
     for (int j = 0; j < numPoints; j++)
     {
-        double r, dx, dy;
-        r = rand() % 80 + 20;
+        double r, dx, dy;   
+        r = rand() % 60 + 20;
         dx = r * cos(theta);
         dy = r * sin(theta);
         theta += dtheta;
@@ -45,19 +45,24 @@ void Particle::draw(RenderTarget& target, RenderStates states) const
 
 void Particle::update(float dt)
 {
-    m_ttl -= dt;
+    m_ttl = m_ttl - dt;
+    
     rotate(dt * m_radiansPerSec);
     scale(SCALE);
+
     float dx, dy;
-    dx = vx * dt;
-    vy -= G * dt;
-    dy = vy * dt;
+    dx = m_vx * dt;
+    m_vy = m_vy - (G * dt);
+    dy = m_vy * dt;
+
+    //cout << m_ttl << " " << m_vx << " " << m_vy << " " << endl;
+
     translate(dx, dy);
 }
 
 void Particle::translate(double xShift, double yShift)
 {
-    TranslationMatrix T(xShift, yShift, 2);
+    TranslationMatrix T(xShift, yShift, m_A.getCols());
     m_A = T + m_A;
     m_centerCoordinate.x += xShift;
     m_centerCoordinate.y += yShift;
@@ -70,6 +75,7 @@ void Particle::rotate(double theta)
 
     RotationMatrix R(theta);
     m_A = R * m_A;
+    //cout << m_A << endl;
     translate(temp.x, temp.y);
 }
 
@@ -79,6 +85,7 @@ void Particle::scale(double c)
     translate(-m_centerCoordinate.x, -m_centerCoordinate.y);
     ScalingMatrix S(c);
     m_A = S * m_A;
+    //cout << m_A << endl;
     translate(temp.x, temp.y);
 }
 
@@ -154,27 +161,27 @@ void Particle::unitTests()
         score++;
     }
 
-    cout << "Applying one rotation of 90 degrees about the origin..." << endl;
+    cout << "applying one rotation of 90 degrees about the origin..." << endl;
     Matrix initialCoords = m_A;
     rotate(PI / 2.0);
-    bool rotationPassed = true;
+    bool rotationpassed = true;
     for (int j = 0; j < initialCoords.getCols(); j++)
     {
         if (!almostEqual(m_A(0, j), -initialCoords(1, j)) || !almostEqual(m_A(1, j), initialCoords(0, j)))
         {
-            cout << "Failed mapping: ";
+            cout << "failed mapping: ";
             cout << "(" << initialCoords(0, j) << ", " << initialCoords(1, j) << ") ==> (" << m_A(0, j) << ", " << m_A(1, j) << ")" << endl;
-            rotationPassed = false;
+            rotationpassed = false;
         }
     }
-    if (rotationPassed)
+    if (rotationpassed)
     {
-        cout << "Passed.  +1" << endl;
+        cout << "passed.  +1" << endl;
         score++;
     }
     else
     {
-        cout << "Failed." << endl;
+        cout << "failed." << endl;
     }
 
     cout << "Applying a scale of 0.5..." << endl;
