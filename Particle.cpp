@@ -1,4 +1,5 @@
 #include "Particle.h"
+#include <cmath>
 
 Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosition) : m_A(2, numPoints)
 {
@@ -12,8 +13,8 @@ Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosit
     if (rand() % 2 != 0)
         m_vx = m_vx * -1;
     m_vy = rand() % 400 + 100;
-    m_color1 = Color::Blue;
-    m_color2 = Color::White;
+    m_color1 = Color::Cyan;
+    m_color2 = Color::Blue;
     double theta = ((float)rand()/(RAND_MAX)/2) * PI;
     double dtheta = 2 * PI / (numPoints - 1);
     for (int j = 0; j < numPoints; j++)

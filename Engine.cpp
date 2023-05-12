@@ -57,7 +57,7 @@ void Engine::update(float dtAsSeconds)
 	int count = 1;
 	for(vector<Particle>::iterator i = m_particles.begin(); i != m_particles.end();)
 	{
-		//Particle p = *i;
+		//Particle p = *i; problematic local copy
 		if (i -> getTTL() > 0.0)
 		{
 			//cout << "Particle " << count << ":" << endl;
